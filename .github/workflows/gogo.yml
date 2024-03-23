@@ -1,13 +1,13 @@
 name: Build and deploy JAR app to Azure Web App
 
-env:
-  AZURE_WEBAPP_NAME: alekmilo-test-app-2    # set this to the name of your Azure Web App
-  JAVA_VERSION: '17'                  # set this to the Java version to use
-  DISTRIBUTION: zulu                  # set this to the Java distribution
-  AZURE_DB: ${{ secrets.AZURE_DB }}
-  AZURE_DB_CONNECTION_STRING: ${{ secrets.AZURE_DB_CONNECTION_STRING }}
-  AZURE_BLOB_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
-  AZURE_BLOB_CONTAINER_NAME: ${{ secrets.AZURE_BLOB_CONTAINER_NAME }}
+# env:
+#   AZURE_WEBAPP_NAME: alekmilo-test-app-2    # set this to the name of your Azure Web App
+#   JAVA_VERSION: '17'                  # set this to the Java version to use
+#   DISTRIBUTION: zulu                  # set this to the Java distribution
+#   AZURE_DB: ${{ secrets.AZURE_DB }}
+#   AZURE_DB_CONNECTION_STRING: ${{ secrets.AZURE_DB_CONNECTION_STRING }}
+#   AZURE_BLOB_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
+#   AZURE_BLOB_CONTAINER_NAME: ${{ secrets.AZURE_BLOB_CONTAINER_NAME }}
 
 on:
 #  push:
@@ -21,47 +21,70 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: print shit
-        run: echo "java version ${{ env.JAVA_VERSION }}" && echo "dbcs ${{ env.AZURE_DB_CONNECTION_STRING }}"
-
-      - uses: actions/checkout@v4
-
-      - name: Set up Java
-        uses: actions/setup-java@v3.0.0
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: ${{ env.DISTRIBUTION }}
-          cache: 'maven'
-
-      - name: Build with Maven
-        run: mvn clean install
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
-        with:
-          name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
-
-  deploy:
-    permissions:
-      contents: none
-    runs-on: ubuntu-latest
-    needs: build
     environment:
-      name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      name: Development
 
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: java-app
+      #  YES !
+      - name: Prnt env var1
+        run: echo "elo1 $ENV_VAR_ONE_1"
+        env:
+          ENV_VAR_ONE_1: ${{ vars.ENV_VAR_ONE }}
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: '*.jar'
+      #  YES !
+      - name: Prnt env var2
+        run: echo "elo2 ${{ vars.ENV_VAR_ONE }}"
+
+      - name: Prnt secret1
+        run: echo "elo1 $MY_SEC"
+        env:
+          MY_SEC: ${{ secrets.SEC_ONE }}
+
+      - name: Prnt secret2
+        run: echo "elo2 ${{ secrets.SEC_ONE }}"
+      # - name: print shit
+      #   run: echo wtf
+
+      # - name: print more shit
+      #   run: echo ${{ env.AZURE_WEBAPP_NAME }}
+
+      # - uses: actions/checkout@v4
+
+      # - name: Set up Java
+      #   uses: actions/setup-java@v3.0.0
+      #   with:
+      #     java-version: ${{ env.JAVA_VERSION }}
+      #     distribution: ${{ env.DISTRIBUTION }}
+      #     cache: 'maven'
+
+      # - name: Build with Maven
+      #   run: mvn clean install
+
+      # - name: Upload artifact for deployment job
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: java-app
+      #     path: '${{ github.workspace }}/target/*.jar'
+
+  # deploy:
+    # permissions:
+    #   contents: none
+    # runs-on: ubuntu-latest
+    # needs: build
+    # environment:
+    #   name: 'Development'
+    #   url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    # steps:
+    #   - name: Download artifact from build job
+    #     uses: actions/download-artifact@v3
+    #     with:
+    #       name: java-app
+
+    #   - name: Deploy to Azure Web App
+    #     id: deploy-to-webapp
+    #     uses: azure/webapps-deploy@v2
+    #     with:
+    #       app-name: ${{ env.AZURE_WEBAPP_NAME }}
+    #       publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+    #       package: '*.jar'
