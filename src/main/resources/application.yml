@@ -27,13 +27,13 @@ spring:
       storage:
         blob:
           container-name: images
-          connection-string: ${BLOB_CS}}
+          connection-string: ${BLOB_CS}
 
 #  sql:
 #    init:
 #      mode: always
 
   config:
-    import: "file:secrets.yml"
+    import: "optional:file:secrets.yml"
 #    import: "classpath:secrets.yml"
 #    import: "optional:classpath:optional-config.yml"
