@@ -36,7 +36,10 @@ jobs:
 
       #  YES !
       - name: Prnt env var2
-        run: echo "elo2 ${{ vars.ENV_VAR_ONE }}" && echo "elo3 ${{ env.ENV_VAR_ONE }}"
+        run: echo "elo2 ${{ vars.ENV_VAR_ONE }}" && echo "elo3 ${{ env.ENV_VAR_THREE }}" && echo "elo4 ${{ env.ENV_VAR_FOUR }}"
+        env:
+          ENV_VAR_THREE: 'a hardcoded value in local env'
+          ENV_VAR_FOUR: ${{ vars.ENV_VAR_ONE }}
 
       - name: Prnt secret1
         run: echo "elo1 $MY_SEC"
