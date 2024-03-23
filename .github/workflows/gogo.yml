@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: print shit
-        run: echo ${{ env.AZURE_DB_CONNECTION_STRING }}
+        run: echo "java version ${{ env.JAVA_VERSION }}" && echo "dbcs ${{ env.AZURE_DB_CONNECTION_STRING }}"
 
       - uses: actions/checkout@v4
 
