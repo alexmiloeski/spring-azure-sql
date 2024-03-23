@@ -1,6 +1,10 @@
 name: Build and deploy JAR app to Azure Web App
 
-# env:
+env:
+  WF_ENV_VAR_1: val1
+  WF_ENV_VAR_2: ${{ vars.ENV_VAR_ONE }}
+  WF_ENV_VAR_3: ${{ env.ENV_VAR_ONE }}
+  WF_ENV_VAR_4: ${{ secrets.SEC_ONE }}
 #   AZURE_WEBAPP_NAME: alekmilo-test-app-2    # set this to the name of your Azure Web App
 #   JAVA_VERSION: '17'                  # set this to the Java version to use
 #   DISTRIBUTION: zulu                  # set this to the Java distribution
@@ -22,8 +26,8 @@ jobs:
 
     runs-on: ubuntu-latest
   
-    environment:
-      name: Development
+    # environment:
+    #   name: Development
       # ENV_VAR_TWO: 'val1 yeye'
       # ENV_VAR_ONE: ${{ env.ENV_VAR_ONE }}
 
@@ -40,6 +44,15 @@ jobs:
         env:
           ENV_VAR_THREE: 'a hardcoded value in local env'
           ENV_VAR_FOUR: ${{ vars.ENV_VAR_ONE }}
+
+      - name: Prnt wf envs 1
+        run: echo "$WF_ENV_VAR_1" && echo "$WF_ENV_VAR_2" && echo "$WF_ENV_VAR_3" && echo "$WF_ENV_VAR_4"
+
+      - name: Prnt wf envs 2
+        run: echo "${{ env.WF_ENV_VAR_1 }}" && echo "${{ env.WF_ENV_VAR_2 }}" && echo "${{ env.WF_ENV_VAR_3 }}" && echo "${{ env.WF_ENV_VAR_4 }}"
+
+      - name: Prnt wf envs 3
+        run: echo "${{ vars.WF_ENV_VAR_1 }}" && echo "${{ vars.WF_ENV_VAR_2 }}" && echo "${{ vars.WF_ENV_VAR_3 }}" && echo "${{ vars.WF_ENV_VAR_4 }}"
 
       - name: Prnt secret1
         run: echo "elo1 $MY_SEC"
