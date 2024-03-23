@@ -5,6 +5,7 @@ env:
   JAVA_VERSION: '17'                  # set this to the Java version to use
   DISTRIBUTION: zulu                  # set this to the Java distribution
   AZURE_DB: ${{ secrets.AZURE_DB }}
+  AZURE_DB_CONNECTION_STRING: ${{ secrets.AZURE_DB_CONNECTION_STRING }}
   AZURE_BLOB_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
   AZURE_BLOB_CONTAINER_NAME: ${{ secrets.AZURE_BLOB_CONTAINER_NAME }}
 
