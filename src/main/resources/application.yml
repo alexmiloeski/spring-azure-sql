@@ -1,0 +1,39 @@
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core: DEBUG
+
+spring:
+  application:
+   name: spring-web-jdk17
+
+  datasource:
+    url: ${DB_CS}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+    show-sql: true
+#    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+
+  cloud:
+    azure:
+      storage:
+        blob:
+          container-name: images
+          connection-string: ${BLOB_CS}}
+
+#  sql:
+#    init:
+#      mode: always
+
+  config:
+    import: "file:secrets.yml"
+#    import: "classpath:secrets.yml"
+#    import: "optional:classpath:optional-config.yml"
