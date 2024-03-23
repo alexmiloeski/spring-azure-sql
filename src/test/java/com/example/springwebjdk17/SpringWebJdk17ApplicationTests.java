@@ -8,11 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class SpringWebJdk17ApplicationTests {
 
-	@BeforeAll
+	/*@BeforeAll
 	public static void foo() {
 		var dotenv = Dotenv.configure().load();
 		dotenv.entries().forEach((entry) -> System.setProperty(entry.getKey(), entry.getValue()));
-	}
+	}*/
 
 	@Test
 	public void contextLoads() {
