@@ -38,10 +38,10 @@ jobs:
       - name: Prnt secret1
         run: echo "elo1 $MY_SEC"
         env:
-          MY_SEC: ${{ secrets.SEC_ONE }}
+          MY_SEC: ${{ secrets.AZURE_DB }}
 
       - name: Prnt secret2
-        run: echo "elo2 ${{ secrets.SEC_ONE }}"
+        run: echo "elo2 ${{ secrets.AZURE_DBX }}"
       # - name: print shit
       #   run: echo wtf
 
