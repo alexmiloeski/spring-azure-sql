@@ -19,24 +19,24 @@ permissions:
 
 jobs:
   build:
+
+    runs-on: ubuntu-latest
   
     environment:
       name: Development
       # ENV_VAR_TWO: 'val1 yeye'
       # ENV_VAR_ONE: ${{ env.ENV_VAR_ONE }}
 
-    runs-on: ubuntu-latest
-
     steps:
       #  YES !
       - name: Prnt env var1
         run: echo "elo1 $ENV_VAR_ONE_1"
         env:
-          ENV_VAR_ONE_1: ${{ env.ENV_VAR_ONE }}
+          ENV_VAR_ONE_1: ${{ vars.ENV_VAR_ONE }}
 
       #  YES !
       - name: Prnt env var2
-        run: echo "elo2 ${{ env.ENV_VAR_ONE }}"
+        run: echo "elo2 ${{ vars.ENV_VAR_ONE }}"
 
       - name: Prnt secret1
         run: echo "elo1 $MY_SEC"
