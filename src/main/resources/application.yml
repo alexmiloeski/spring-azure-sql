@@ -10,7 +10,7 @@ spring:
    name: spring-web-jdk17
 
   datasource:
-    url: ${DB_CS}
+    url: ${AZURE_DB_CONNECTION_STRING}
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
   jpa:
@@ -27,7 +27,7 @@ spring:
       storage:
         blob:
           container-name: images
-          connection-string: ${BLOB_CS}
+          connection-string: ${AZURE_BLOB_CONNECTION_STRING}
 
 #  sql:
 #    init:
