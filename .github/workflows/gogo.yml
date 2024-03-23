@@ -9,6 +9,9 @@ name: Build and deploy JAR app to Azure Web App
 #   AZURE_BLOB_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
 #   AZURE_BLOB_CONTAINER_NAME: ${{ secrets.AZURE_BLOB_CONTAINER_NAME }}
 
+env:
+  name: Development
+
 on:
 #  push:
 #    branches: [ "main" ]
@@ -20,9 +23,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    environment:
-      name: Developmentx
 
     steps:
       #  YES !
