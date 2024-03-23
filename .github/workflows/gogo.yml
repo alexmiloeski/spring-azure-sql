@@ -20,7 +20,7 @@ permissions:
 jobs:
   build:
   
-    env:
+    environment:
       name: Development
       # ENV_VAR_TWO: 'val1 yeye'
       # ENV_VAR_ONE: ${{ env.ENV_VAR_ONE }}
