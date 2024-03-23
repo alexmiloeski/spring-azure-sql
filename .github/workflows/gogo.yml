@@ -31,11 +31,11 @@ jobs:
       - name: Prnt env var1
         run: echo "elo1 $ENV_VAR_ONE_1"
         env:
-          ENV_VAR_ONE_1: ${{ vars.ENV_VAR_ONE }}
+          ENV_VAR_ONE_1: ${{ env.ENV_VAR_ONE }}
 
       #  YES !
       - name: Prnt env var2
-        run: echo "elo2 ${{ vars.ENV_VAR_TWO }}"
+        run: echo "elo2 ${{ env.ENV_VAR_TWO }}"
 
       - name: Prnt secret1
         run: echo "elo1 $MY_SEC"
