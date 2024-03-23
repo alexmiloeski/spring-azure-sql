@@ -11,6 +11,8 @@ name: Build and deploy JAR app to Azure Web App
 
 env:
   name: Development
+  ENV_VAR_TWO: 'val1 yeye'
+  ENV_VAR_ONE: ${{ env.ENV_VAR_ONE }}
 
 on:
 #  push:
@@ -33,7 +35,7 @@ jobs:
 
       #  YES !
       - name: Prnt env var2
-        run: echo "elo2 ${{ vars.ENV_VAR_ONE }}"
+        run: echo "elo2 ${{ vars.ENV_VAR_TWO }}"
 
       - name: Prnt secret1
         run: echo "elo1 $MY_SEC"
