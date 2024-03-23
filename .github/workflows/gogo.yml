@@ -9,11 +9,6 @@ name: Build and deploy JAR app to Azure Web App
 #   AZURE_BLOB_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
 #   AZURE_BLOB_CONTAINER_NAME: ${{ secrets.AZURE_BLOB_CONTAINER_NAME }}
 
-env:
-  name: Development
-  # ENV_VAR_TWO: 'val1 yeye'
-  # ENV_VAR_ONE: ${{ env.ENV_VAR_ONE }}
-
 on:
 #  push:
 #    branches: [ "main" ]
@@ -24,6 +19,12 @@ permissions:
 
 jobs:
   build:
+  
+    env:
+      name: Development
+      # ENV_VAR_TWO: 'val1 yeye'
+      # ENV_VAR_ONE: ${{ env.ENV_VAR_ONE }}
+
     runs-on: ubuntu-latest
 
     steps:
