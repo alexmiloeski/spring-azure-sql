@@ -11,8 +11,8 @@ env:
   CUSTOM_VALUE_1: ${{ vars.CUSTOM_VALUE_1 }}
 
 on:
-#  push:
-#    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
