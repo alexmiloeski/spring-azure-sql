@@ -1,5 +1,5 @@
-#mycustom:
-#  value1: ${CUSTOM_VALUE_1}
+mycustom:
+  value1: ${CUSTOM_VALUE_1}
 
 logging:
   level:

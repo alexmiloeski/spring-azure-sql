@@ -1,17 +1,18 @@
 package com.example.springwebjdk17;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
-//    @Value("${mycustom.value1}")
-//    private String myCustomValue1;
+    @Value("${mycustom.value1}")
+    private String myCustomValue1;
 
     @GetMapping
     public String foo() {
-//        return "myCustomValue1=[" + myCustomValue1 + "]";
-        return "myCustomValue1=[SHUT UP!]";
+        return "myCustomValue1=[" + myCustomValue1 + "]";
+//        return "myCustomValue1=[SHUT UP!]";
     }
 //    private final PersonRepo repo;
 //
