@@ -40,3 +40,5 @@ spring:
     import: "optional:file:secrets.yml"
 #    import: "classpath:secrets.yml"
 #    import: "optional:classpath:optional-config.yml"
+server:
+  port: 80
