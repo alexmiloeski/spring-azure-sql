@@ -1,109 +1,31 @@
-name: Build and deploy JAR app to Azure Web App
-
-env:
-  WF_ENV_VAR_1: val1
-  WF_ENV_VAR_2: ${{ vars.ENV_VAR_ONE }}
-  WF_ENV_VAR_3: kurac #${{ env.ENV_VAR_ONE }}
-  WF_ENV_VAR_4: ${{ secrets.SEC_ONE }}
-#   AZURE_WEBAPP_NAME: alekmilo-test-app-2    # set this to the name of your Azure Web App
-#   JAVA_VERSION: '17'                  # set this to the Java version to use
-#   DISTRIBUTION: zulu                  # set this to the Java distribution
-#   AZURE_DB: ${{ secrets.AZURE_DB }}
-#   AZURE_DB_CONNECTION_STRING: ${{ secrets.AZURE_DB_CONNECTION_STRING }}
-#   AZURE_BLOB_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
-#   AZURE_BLOB_CONTAINER_NAME: ${{ secrets.AZURE_BLOB_CONTAINER_NAME }}
+name: Env Test 1
 
 on:
-#  push:
-#    branches: [ "main" ]
   workflow_dispatch:
 
-permissions:
-  contents: read
+env:
+  AZURE_DB: ${{ secrets.AZURE_DB }}
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-  
-    # environment:
-    #   name: Development
-      # ENV_VAR_TWO: 'val1 yeye'
-      # ENV_VAR_ONE: ${{ env.ENV_VAR_ONE }}
 
     steps:
-      #  YES !
-      - name: Prnt env var1
-        run: echo "elo1 $ENV_VAR_ONE_1"
-        env:
-          ENV_VAR_ONE_1: ${{ vars.ENV_VAR_ONE }}
+      - name: Build with Maven
+        run: |
+          echo "1.1 sec is ${{ secrets.AZURE_DB }}"
+          echo "1.2 env is ${{ env.AZURE_DB }}"
+          echo "1.3 vars is ${{ vars.AZURE_DB }}"
 
-      #  YES !
-      - name: Prnt env var2
-        run: echo "elo2 ${{ vars.ENV_VAR_ONE }}" && echo "elo3 ${{ env.ENV_VAR_THREE }}" && echo "elo4 ${{ env.ENV_VAR_FOUR }}"
-        env:
-          ENV_VAR_THREE: 'a hardcoded value in local env'
-          ENV_VAR_FOUR: ${{ vars.ENV_VAR_ONE }}
+  deploy:
+    runs-on: ubuntu-latest
 
-      - name: Prnt wf envs 1
-        run: echo "$WF_ENV_VAR_1" && echo "$WF_ENV_VAR_2" && echo "$WF_ENV_VAR_3" && echo "$WF_ENV_VAR_4"
+    environment:
+      name: "Development"
 
-      - name: Prnt wf envs 2
-        run: echo "${{ env.WF_ENV_VAR_1 }}" && echo "${{ env.WF_ENV_VAR_2 }}" && echo "${{ env.WF_ENV_VAR_3 }}" && echo "${{ env.WF_ENV_VAR_4 }}"
-
-      - name: Prnt wf envs 3
-        run: echo "${{ vars.WF_ENV_VAR_1 }}" && echo "${{ vars.WF_ENV_VAR_2 }}" && echo "${{ vars.WF_ENV_VAR_3 }}" && echo "${{ vars.WF_ENV_VAR_4 }}"
-
-      - name: Prnt secret1
-        run: echo "elo1 $MY_SEC"
-        env:
-          MY_SEC: ${{ secrets.AZURE_DB }}
-
-      - name: Prnt secret2
-        run: echo "elo2 ${{ secrets.AZURE_DBX }}"
-      # - name: print shit
-      #   run: echo wtf
-
-      # - name: print more shit
-      #   run: echo ${{ env.AZURE_WEBAPP_NAME }}
-
-      # - uses: actions/checkout@v4
-
-      # - name: Set up Java
-      #   uses: actions/setup-java@v3.0.0
-      #   with:
-      #     java-version: ${{ env.JAVA_VERSION }}
-      #     distribution: ${{ env.DISTRIBUTION }}
-      #     cache: 'maven'
-
-      # - name: Build with Maven
-      #   run: mvn clean install
-
-      # - name: Upload artifact for deployment job
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: java-app
-      #     path: '${{ github.workspace }}/target/*.jar'
-
-  # deploy:
-    # permissions:
-    #   contents: none
-    # runs-on: ubuntu-latest
-    # needs: build
-    # environment:
-    #   name: 'Development'
-    #   url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    # steps:
-    #   - name: Download artifact from build job
-    #     uses: actions/download-artifact@v3
-    #     with:
-    #       name: java-app
-
-    #   - name: Deploy to Azure Web App
-    #     id: deploy-to-webapp
-    #     uses: azure/webapps-deploy@v2
-    #     with:
-    #       app-name: ${{ env.AZURE_WEBAPP_NAME }}
-    #       publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-    #       package: '*.jar'
+    steps:
+      - name: print2
+        run: |
+          echo "2.1 sec is ${{ secrets.AZURE_DB }}"
+          echo "2.2 env is ${{ env.AZURE_DB }}"
+          echo "2.3 vars is ${{ vars.AZURE_DB }}"
