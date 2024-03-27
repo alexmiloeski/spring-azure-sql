@@ -9,35 +9,37 @@ env:
   ENV_VAR_ONEy: well nope
 
 jobs:
-  build:
+  job-one:
     runs-on: ubuntu-latest
+
+    environment:
+      name: "Developmentx"
 
     steps:
       - name: print1
         run: |
+          echo "1 >>> env.envx is ${{ env.ENV_VAR_ONEx }}"
+          echo "1 >>> env.secx is ${{ env.SEC_ONEx }}"
+          echo "1 >>> vars.env is ${{ vars.ENV_VAR_ONE }}"
+          echo "1 >>> sec.sec is ${{ secrets.SEC_ONE }}"
+          
           echo "1 env.env is ${{ env.ENV_VAR_ONE }}"
-          echo "1 env.envx is ${{ env.ENV_VAR_ONEx }}"
           echo "1 env.envy is ${{ env.ENV_VAR_ONEy }}"
           echo "1 env.sec is ${{ env.SEC_ONE }}"
-          echo "1 env.secx is ${{ env.SEC_ONEx }}"
-          echo "1 vars.env is ${{ vars.ENV_VAR_ONE }}"
           echo "1 vars.envx is ${{ vars.ENV_VAR_ONEx }}"
-          echo "1 sec.sec is ${{ secrets.SEC_ONE }}"
 
-  deploy:
+  job-two:
     runs-on: ubuntu-latest
-
-    environment:
-      name: "Development"
 
     steps:
       - name: print2
         run: |
+          echo "1 >>> env.envx is ${{ env.ENV_VAR_ONEx }}"
+          echo "1 >>> env.secx is ${{ env.SEC_ONEx }}"
+          echo "1 >>> vars.env is ${{ vars.ENV_VAR_ONE }}"
+          echo "1 >>> sec.sec is ${{ secrets.SEC_ONE }}"
+          
           echo "1 env.env is ${{ env.ENV_VAR_ONE }}"
-          echo "1 env.envx is ${{ env.ENV_VAR_ONEx }}"
           echo "1 env.envy is ${{ env.ENV_VAR_ONEy }}"
           echo "1 env.sec is ${{ env.SEC_ONE }}"
-          echo "1 env.secx is ${{ env.SEC_ONEx }}"
-          echo "1 vars.env is ${{ vars.ENV_VAR_ONE }}"
           echo "1 vars.envx is ${{ vars.ENV_VAR_ONEx }}"
-          echo "1 sec.sec is ${{ secrets.SEC_ONE }}"
