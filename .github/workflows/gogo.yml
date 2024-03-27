@@ -13,7 +13,6 @@ jobs:
     steps:
       - name: Build with Maven
         run: |
-          echo "1.x mm is $AZURE_DB"
           echo "1.0 mm is ${{ AZURE_DB }}"
           echo "1.1 sec is ${{ secrets.AZURE_DB }}"
           echo "1.2 env is ${{ env.AZURE_DB }}"
