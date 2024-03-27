@@ -11,10 +11,13 @@ public class Controller {
 
     @GetMapping
     public String foo() {
-        return "myCustomValue1=[" + myCustomValue1 + "]";
+        Person p1r = repo.findById(3L).orElse(null);
+        if (p1r == null) return "Couldn't find the person, so here's the custom value[" + myCustomValue1 + "]";
+        return "person's name=[" + p1r.getName() + "]";
+//        return "myCustomValue1=[" + myCustomValue1 + "]";
 //        return "myCustomValue1=[SHUT UP!]";
     }
-//    private final PersonRepo repo;
+    private final PersonRepo repo;
 //
 //    @Value("azure-blob://" + "${spring.cloud.azure.storage.blob.container-name}" + "/test.txt")
 //    private Resource resource;
@@ -25,9 +28,9 @@ public class Controller {
 //    @Value("${spring.cloud.azure.storage.blob.container-name}")
 //    private String blobContainerName;
 //
-//    public Controller(PersonRepo repo) {
-//        this.repo = repo;
-//    }
+    public Controller(PersonRepo repo) {
+        this.repo = repo;
+    }
 //
 //    @GetMapping("/test")
 //    public String testEndpoint() {

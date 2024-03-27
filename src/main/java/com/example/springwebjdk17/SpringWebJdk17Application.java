@@ -18,12 +18,12 @@ public class SpringWebJdk17Application {
 
 		var ctx = SpringApplication.run(SpringWebJdk17Application.class, args);
 
-//		PersonRepo repo = ctx.getBean(PersonRepo.class);
-//
-////		Person p1 = new Person(3L, "John");
-////		repo.save(p1);
-//
-//		Person p1r = repo.findById(3L).orElse(null);
-//		System.out.println("p1r = " + p1r);
+		PersonRepo repo = ctx.getBean(PersonRepo.class);
+
+//		Person p1 = new Person(3L, "John");
+//		repo.save(p1);
+
+		Person p1r = repo.findById(3L).orElse(null);
+		System.out.println("p1r = " + p1r);
 	}
 }
