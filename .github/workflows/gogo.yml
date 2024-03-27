@@ -6,7 +6,7 @@ on:
 env:
   ENV_VAR_ONEx: ${{ vars.ENV_VAR_ONE }}
   SEC_ONEx: ${{ secrets.SEC_ONE }}
-  ENV_VAR_ONEy: ${{ env.ENV_VAR_ONE }}
+  ENV_VAR_ONEy: well nope
 
 jobs:
   build:
