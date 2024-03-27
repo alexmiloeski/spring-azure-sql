@@ -8,6 +8,7 @@ env:
   AZURE_DB_CONNECTION_STRING: ${{ secrets.AZURE_DB_CONNECTION_STRING }}
   AZURE_BLOB_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
   AZURE_BLOB_CONTAINER_NAME: ${{ secrets.AZURE_BLOB_CONTAINER_NAME }}
+  # CUSTOM_VALUE_1: ${{ vars.CUSTOM_VALUE_1 }}
 
 on:
 #  push:
@@ -20,6 +21,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    environment:
+      name: 'Development'
 
     steps:
       - uses: actions/checkout@v4
