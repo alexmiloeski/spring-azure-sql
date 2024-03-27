@@ -4,18 +4,25 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_DBx: ${{ secrets.AZURE_DB }}
+  ENV_VAR_ONEx: ${{ vars.ENV_VAR_ONE }}
+  SEC_ONEx: ${{ secrets.SEC_ONE }}
+  ENV_VAR_ONEy: ${{ env.ENV_VAR_ONE }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Build with Maven
+      - name: print1
         run: |
-          echo "1.1 sec is ${{ secrets.AZURE_DB }}"
-          echo "1.2 env is ${{ env.AZURE_DB }}"
-          echo "1.3 vars is ${{ vars.AZURE_DB }}"
+          echo "1 env.env is ${{ env.ENV_VAR_ONE }}"
+          echo "1 env.envx is ${{ env.ENV_VAR_ONEx }}"
+          echo "1 env.envy is ${{ env.ENV_VAR_ONEy }}"
+          echo "1 env.sec is ${{ env.SEC_ONE }}"
+          echo "1 env.secx is ${{ env.SEC_ONEx }}"
+          echo "1 vars.env is ${{ vars.ENV_VAR_ONE }}"
+          echo "1 vars.envx is ${{ vars.ENV_VAR_ONEx }}"
+          echo "1 sec.sec is ${{ secrets.SEC_ONE }}"
 
   deploy:
     runs-on: ubuntu-latest
@@ -26,6 +33,11 @@ jobs:
     steps:
       - name: print2
         run: |
-          echo "2.1 sec is ${{ secrets.AZURE_DB }}"
-          echo "2.2 env is ${{ env.AZURE_DB }}"
-          echo "2.3 vars is ${{ vars.AZURE_DB }}"
+          echo "1 env.env is ${{ env.ENV_VAR_ONE }}"
+          echo "1 env.envx is ${{ env.ENV_VAR_ONEx }}"
+          echo "1 env.envy is ${{ env.ENV_VAR_ONEy }}"
+          echo "1 env.sec is ${{ env.SEC_ONE }}"
+          echo "1 env.secx is ${{ env.SEC_ONEx }}"
+          echo "1 vars.env is ${{ vars.ENV_VAR_ONE }}"
+          echo "1 vars.envx is ${{ vars.ENV_VAR_ONEx }}"
+          echo "1 sec.sec is ${{ secrets.SEC_ONE }}"
