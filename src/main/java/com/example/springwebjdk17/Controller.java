@@ -3,6 +3,7 @@ package com.example.springwebjdk17;
 import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobContainerClientBuilder;
+import com.azure.storage.blob.models.BlobItem;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -12,8 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class Controller {
@@ -67,6 +70,18 @@ public class Controller {
     @GetMapping("/blob/test")
     public String readFileBlob() throws IOException {
         return StreamUtils.copyToString(resource.getInputStream(), Charset.defaultCharset());
+    }
+
+    @GetMapping("/blob/all")
+    public String listAllBlobs() {
+        BlobContainerClient blobContainerClient = new BlobContainerClientBuilder()
+                .connectionString(blobConnectionString)
+                .containerName(blobContainerName)
+                .buildClient();
+        String blobNames = blobContainerClient.listBlobs().stream()
+                .map(BlobItem::getName)
+                .collect(Collectors.joining(",\n<br/>"));
+        return "blobNames=[<br/>" + blobNames + "<br/>]";
     }
 
     @PostMapping("/blob/upload")
