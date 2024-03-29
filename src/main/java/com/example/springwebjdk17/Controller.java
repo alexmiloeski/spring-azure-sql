@@ -1,23 +1,48 @@
 package com.example.springwebjdk17;
 
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class Controller {
     @Value("${mycustom.value1}")
     private String myCustomValue1;
 
-    @GetMapping
-    public String foo() {
-        Person p1r = repo.findById(3L).orElse(null);
-        if (p1r == null) return "Couldn't find the person, so here's the custom value[" + myCustomValue1 + "]";
-        return "person's name=[" + p1r.getName() + "]";
-//        return "myCustomValue1=[" + myCustomValue1 + "]";
-//        return "myCustomValue1=[SHUT UP!]";
-    }
     private final PersonRepo repo;
+
+    @GetMapping
+    public String getAllPersons() {
+        Iterable<Person> personIterable = repo.findAll();
+        List<Person> personList = new ArrayList<>();
+        personIterable.forEach(personList::add);
+        if (personList.isEmpty()) {
+            return "Couldn't find any persons.";
+        }
+        return "persons list=[" + personList + "]";
+    }
+
+    @GetMapping("{id}")
+    public String getPersonById(@PathVariable long id) {
+        Person p1r = repo.findById(id).orElse(null);
+        if (p1r == null) return "Couldn't find that person";
+        return "person's name=[" + p1r.getName() + "]";
+    }
+
+    @PostMapping("{id}")
+    public void postPerson(@PathVariable long id, @NotBlank @RequestParam String name) {
+        Person p1 = new Person(id, name);
+        repo.save(p1);
+    }
+
+    @GetMapping("custom-value")
+    public String getCustomValue() {
+        return "custom value=[" + myCustomValue1 + "]";
+    }
+
 //
 //    @Value("azure-blob://" + "${spring.cloud.azure.storage.blob.container-name}" + "/test.txt")
 //    private Resource resource;
@@ -79,3 +104,4 @@ public class Controller {
 //        blob.upload(file.getInputStream(),file.getSize(),true);
 //    }
 }
+
