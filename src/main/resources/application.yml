@@ -29,7 +29,7 @@ spring:
     azure:
       storage:
         blob:
-          container-name: images
+          container-name: ${AZURE_BLOB_CONTAINER_NAME}
           connection-string: ${AZURE_BLOB_CONNECTION_STRING}
 
 #  sql:
@@ -37,7 +37,7 @@ spring:
 #      mode: always
 
   config:
-    import: "optional:file:secrets.yml"
+    import: "optional:file:secrets.yml,optional:file:env.yml"
 #    import: "classpath:secrets.yml"
 #    import: "optional:classpath:optional-config.yml"
 server:
