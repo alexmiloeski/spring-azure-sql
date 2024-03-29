@@ -1,0 +1,47 @@
+mycustom:
+  value1: test-custom-value
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core: DEBUG
+
+spring:
+  application:
+   name: spring-web-jdk17
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+
+  cloud:
+    azure:
+      storage:
+        blob:
+          container-name: images
+          connection-string: ${AZURE_BLOB_CONNECTION_STRING}
+
+  sql:
+    init:
+      platform: h2
+      mode: always
+
+  config:
+    import: "optional:file:secrets.yml"
+#    import: "classpath:secrets.yml"
+#    import: "optional:classpath:optional-config.yml"
+server:
+  port: 80
