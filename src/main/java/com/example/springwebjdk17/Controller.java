@@ -1,10 +1,14 @@
 package com.example.springwebjdk17;
 
+import com.azure.storage.blob.BlobClient;
+import com.azure.storage.blob.BlobContainerClient;
+import com.azure.storage.blob.BlobContainerClientBuilder;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -16,11 +20,11 @@ public class Controller {
     @Value("azure-blob://" + "${spring.cloud.azure.storage.blob.container-name}" + "/text.txt")
     private Resource resource;
 
-//    @Value("${spring.cloud.azure.storage.blob.connection-string}")
-//    private String blobConnectionString;
-//
-//    @Value("${spring.cloud.azure.storage.blob.container-name}")
-//    private String blobContainerName;
+    @Value("${spring.cloud.azure.storage.blob.connection-string}")
+    private String blobConnectionString;
+
+    @Value("${spring.cloud.azure.storage.blob.container-name}")
+    private String blobContainerName;
 
     @Value("${mycustom.value1}")
     private String myCustomValue1;
@@ -65,14 +69,13 @@ public class Controller {
         return StreamUtils.copyToString(resource.getInputStream(), Charset.defaultCharset());
     }
 
-//    @PostMapping("/blob/upload")
-//    public void uploadFileBlob(@RequestParam("file") MultipartFile file) throws IOException {
-//        BlobContainerClient blobContainerClient = new BlobContainerClientBuilder()
-//                .connectionString(blobConnectionString)
-//                .containerName(blobContainerName)
-//                .buildClient();
-//        BlobClient blob = blobContainerClient.getBlobClient(file.getOriginalFilename());
-//        blob.upload(file.getInputStream(),file.getSize(),true);
-//    }
+    @PostMapping("/blob/upload")
+    public void uploadFileBlob(@RequestParam("file") MultipartFile file) throws IOException {
+        BlobContainerClient blobContainerClient = new BlobContainerClientBuilder()
+                .connectionString(blobConnectionString)
+                .containerName(blobContainerName)
+                .buildClient();
+        BlobClient blob = blobContainerClient.getBlobClient(file.getOriginalFilename());
+        blob.upload(file.getInputStream(),file.getSize(),true);
+    }
 }
-
